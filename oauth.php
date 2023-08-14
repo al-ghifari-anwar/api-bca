@@ -52,7 +52,7 @@ curl_close($curl);
 
 $res = json_decode($response, true);
 
-$token = $res['accesToken'];
+$token = $res['accessToken'];
 
 $saveToken = mysqli_query($conn, "UPDATE tb_token SET token = '$token' WHERE id_token = 1");
 
