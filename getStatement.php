@@ -15,7 +15,7 @@ $url = "/openapi/v1.0/bank-statement";
 $getToken = mysqli_query($conn, "SELECT * FROM tb_token WHERE id_token = 1");
 $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
 $oauth_token = $rowToken['token'];
-$bodyStr = "{\"partnerReferenceNo\": \"2020102900000000000001\",\"accountNo\": \"8880762231\",\"bankCardToken\": \"0611106351\",\"fromDateTime\": \"2023-06-10T00:00:00+07:00\",\"toDateTime\": \"2023-06-14T00:00:00+07:00\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"2020102900000000000001\",\"accountNo\": \"8880762231\",\"bankCardToken\": \"0611106351\",\"fromDateTime\": \"2023-08-10T00:00:00+07:00\",\"toDateTime\": \"2023-08-14T00:00:00+07:00\"}";
 $body = json_decode($bodyStr, true);
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
@@ -48,8 +48,8 @@ curl_setopt_array($curl, array(
  "partnerReferenceNo": "2020102900000000000001",
  "accountNo": "8880762231",
  "bankCardToken": "0611106351",
- "fromDateTime": "2023-06-10T00:00:00+07:00",
- "toDateTime": "2023-06-14T00:00:00+07:00"
+ "fromDateTime": "2023-08-10T00:00:00+07:00",
+ "toDateTime": "2023-08-14T00:00:00+07:00"
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
