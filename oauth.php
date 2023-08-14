@@ -20,10 +20,40 @@ $signatureOauth = $signatureUtil->generateOauthSignature($private_key, $client_i
 
 // echo $time_stamp;
 
-echo "Signature Oauth :" . $signatureOauth . "\n";
-$isValidSignatureOauth = $signatureUtil->validateOauthSignature($public_key, $client_id, $time_stamp, $signatureOauth);
-echo "isValidSignatureOauth :" . $isValidSignatureOauth . "\n";
+// echo "Signature Oauth :" . $signatureOauth . "\n";
+// $isValidSignatureOauth = $signatureUtil->validateOauthSignature($public_key, $client_id, $time_stamp, $signatureOauth);
+// echo "isValidSignatureOauth :" . $isValidSignatureOauth . "\n";
 
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.klikbca.com/openapi/v1.0/access-token/b2b',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => '{"grantType":"client_credentials"}',
+    CURLOPT_HTTPHEADER => array(
+        'X-TIMESTAMP: ' . $time_stamp,
+        'X-CLIENT-KEY: ' . $client_id,
+        'Content-Type: application/json',
+        'X-SIGNATURE: ' . $signatureOauth,
+        'X-CLIENT-SECRET: ' . $client_secret
+    ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+
+$res = json_decode($response, true);
+
+$token = $res['accesToken'];
+
+echo $token;
 
 // $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method, $url, $oauth_token, $time_stamp, $body);
 // echo "Signature api :" . $signatureApi . "\n";
