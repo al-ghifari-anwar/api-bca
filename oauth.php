@@ -1,4 +1,5 @@
 <?php
+include_once("config.php");
 // PLEASE ENABLE EXTENTION CURL OPENSSL
 require dirname(__FILE__) . '/com/bca/openapi/client/utils/SignatureUtil.php';
 
@@ -53,7 +54,15 @@ $res = json_decode($response, true);
 
 $token = $res['accesToken'];
 
-echo $token;
+$saveToken = mysqli_query($conn, "UPDATE tb_token SET token = '$token' WHERE id_token = 1");
+
+if ($saveToken) {
+    $return = ["response" => 200, "status" => "ok", "message" => "Success get token!"];
+    echo json_encode($return);
+} else {
+    $return = ["response" => 200, "status" => "failed", "message" => "Failed get token!"];
+    echo json_encode($return);
+}
 
 // $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method, $url, $oauth_token, $time_stamp, $body);
 // echo "Signature api :" . $signatureApi . "\n";
