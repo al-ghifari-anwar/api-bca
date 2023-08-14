@@ -18,7 +18,7 @@ $oauth_token = $rowToken['token'];
 $bodyStr = "{\"partnerReferenceNo\": \"2020102900000000000001\",\"accountNo\": \"8880762231\",\"bankCardToken\": \"0611106351\",\"fromDateTime\": \"2023-06-10T00:00:00+07:00\",\"toDateTime\": \"2023-06-14T00:00:00+07:00\"}";
 $body = json_decode($bodyStr, true);
 
-// $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
+$signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
 // $signatureOauth = $signatureUtil->generateOauthSignature($private_key, $client_id, $time_stamp);
 
 // echo $time_stamp;
@@ -36,7 +36,7 @@ $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://devapi.klikbca.com/openapi/v1.0/bank-statement',
+    CURLOPT_URL => 'https://api.klikbca.com/openapi/v1.0/bank-statement',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
