@@ -52,8 +52,8 @@ curl_setopt_array($curl, array(
  "partnerReferenceNo": "' . $partnerReferenceNo . '",
  "accountNo": "8880762231",
  "bankCardToken": "0611106351",
- "fromDateTime": "2023-08-10T00:00:00+07:00",
- "toDateTime": "2023-08-14T00:00:00+07:00"
+ "fromDateTime": "2023-09-12T00:00:00+07:00",
+ "toDateTime": "2023-09-12T00:00:00+07:00"
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
