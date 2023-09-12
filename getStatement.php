@@ -12,10 +12,14 @@ $private_key = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDOIYqwUxotB8su
 $time_stamp = date('Y-m-d\TH:i:sP');
 $method = "POST";
 $url = "/openapi/v1.0/bank-statement";
-$getToken = mysqli_query($conn, "SELECT * FROM tb_token WHERE id_token = 1");
+$getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = $rowToken['token'];
-$bodyStr = "{\"partnerReferenceNo\": \"2020102900000000000001\",\"accountNo\": \"8880762231\",\"bankCardToken\": \"0611106351\",\"fromDateTime\": \"2023-08-10T00:00:00+07:00\",\"toDateTime\": \"2023-08-14T00:00:00+07:00\"}";
+$oauth_token = $rowToken['bca_token'];
+// For Body
+$partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
+$fromDate = date('Y-m-d\TH:i:sP');
+$toDate = date('Y-m-d\TH:i:sP');
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"bankCardToken\": \"0611106351\",\"fromDateTime\": \"2023-09-12T00:00:00+07:00\",\"toDateTime\": \"2023-09-12T00:00:00+07:00\"}";
 $body = json_decode($bodyStr, true);
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
@@ -45,7 +49,7 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => '{
- "partnerReferenceNo": "2020102900000000000001",
+ "partnerReferenceNo": "' . $partnerReferenceNo . '",
  "accountNo": "8880762231",
  "bankCardToken": "0611106351",
  "fromDateTime": "2023-08-10T00:00:00+07:00",
@@ -57,7 +61,7 @@ curl_setopt_array($curl, array(
         'X-CLIENT-KEY: ' . $client_id,
         'Content-Type: application/json',
         'Authorization: Bearer ' . $oauth_token,
-        'X-EXTERNAL-ID: 0000000001',
+        'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
         'X-TIMESTAMP: ' . $time_stamp,
         'X-SIGNATURE: ' . $signatureApi
     ),
