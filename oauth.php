@@ -12,8 +12,8 @@ $private_key = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDOIYqwUxotB8su
 $time_stamp = date('Y-m-d\TH:i:sP');
 $method = "POST";
 $url = "/openapi/v1.0/access-token/b2b";
-$oauth_token = "4zw4sGDwW8sE4ymF9yyYwYPCFFHRrI2VVZjfLKtlAiTsnnJynp656u";
-$bodyStr = "{\"key with space\":\"value with space\"}";
+// $oauth_token = "4zw4sGDwW8sE4ymF9yyYwYPCFFHRrI2VVZjfLKtlAiTsnnJynp656u";
+// $bodyStr = "{\"key with space\":\"value with space\"}";
 $body = json_decode($bodyStr, true);
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
@@ -53,8 +53,8 @@ curl_close($curl);
 $res = json_decode($response, true);
 
 $token = $res['accessToken'];
-
-$saveToken = mysqli_query($conn, "UPDATE tb_token SET token = '$token' WHERE id_token = 1");
+$dateToken = date("Y-m-d H:i:s");
+$saveToken = mysqli_query($conn, "UPDATE tb_token SET token = '$token', SET date_token = '$dateToken' WHERE id_token = 1");
 
 if ($saveToken) {
     $return = ["response" => 200, "status" => "ok", "message" => "Success get token!"];
