@@ -54,13 +54,13 @@ $res = json_decode($response, true);
 
 $token = $res['accessToken'];
 $dateToken = date("Y-m-d H:i:s");
-$saveToken = mysqli_query($conn, "UPDATE tb_bca_token SET token = '$token', SET date_token = '$dateToken' WHERE id_token = 1");
+$saveToken = mysqli_query($conn, "UPDATE tb_bca_token SET token = '$token', SET date_token = '$dateToken' WHERE id_bca_token = 1");
 
 if ($saveToken) {
     $return = ["response" => 200, "status" => "ok", "message" => "Success get token!"];
     echo json_encode($return);
 } else {
-    $return = ["response" => 200, "status" => "failed", "message" => "Failed get token!"];
+    $return = ["response" => 200, "status" => "failed", "message" => mysqli_error($conn)];
     echo json_encode($return);
 }
 
