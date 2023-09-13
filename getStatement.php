@@ -69,4 +69,25 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 
 curl_close($curl);
-echo $response;
+
+$res = json_decode($response, true);
+$detailData = $res['detailData'];
+// echo json_encode($detailData);
+
+foreach ($detailData as $detailData) {
+    if ($detailData['type'] == 'CREDIT') {
+        $amount = (int)$detailData['amount']['value'];
+        // echo $amount . "\n";
+        $check = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
+
+        if ($check) {
+            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
+            echo json_encode($return);
+        } else {
+            $return = ["response" => 200, "status" => "failed", "message" => mysqli_error($conn)];
+            echo json_encode($return);
+        }
+    }
+}
+
+// echo $response;
