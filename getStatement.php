@@ -82,9 +82,9 @@ foreach ($detailData as $detailData) {
         $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
         $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount' AND status_invoice = 'waiting'");
+        $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
 
-        if ($checkInv) {
-            $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
+        if ($rowInv) {
             $id_invoice = $rowInv['id_invoice'];
             $setStatus = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
 
