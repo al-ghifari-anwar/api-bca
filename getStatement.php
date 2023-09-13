@@ -77,7 +77,7 @@ $detailData = $res['detailData'];
 foreach ($detailData as $detailData) {
     if ($detailData['type'] == 'CREDIT') {
         $amount = (int)$detailData['amount']['value'];
-        $transactionDate = date('Y-m-d H:i:s', strtotime($detailData['transaction_date']));
+        $transactionDate = date('Y-m-d H:i:s');
         $remark = $detailData['remark'];
         $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
