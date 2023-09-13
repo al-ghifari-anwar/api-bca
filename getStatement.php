@@ -19,7 +19,7 @@ $oauth_token = $rowToken['bca_token'];
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\TH:i:sP');
 $toDate = date('Y-m-d\TH:i:sP');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"fromDateTime\": \"2023-09-12T00:00:00+07:00\",\"toDateTime\": \"2023-09-12T00:00:00+07:00\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"fromDateTime\": \"$fromDate\",\"toDateTime\": \"$toDate\"}";
 $body = json_decode($bodyStr, true);
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
@@ -51,8 +51,8 @@ curl_setopt_array($curl, array(
     CURLOPT_POSTFIELDS => '{
  "partnerReferenceNo": "' . $partnerReferenceNo . '",
  "accountNo": "8880762231",
- "fromDateTime": "2023-09-12T00:00:00+07:00",
- "toDateTime": "2023-09-12T00:00:00+07:00"
+ "fromDateTime": "' . $fromDate . '",
+ "toDateTime": "' . $toDate . '"
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
@@ -77,15 +77,42 @@ $detailData = $res['detailData'];
 foreach ($detailData as $detailData) {
     if ($detailData['type'] == 'CREDIT') {
         $amount = (int)$detailData['amount']['value'];
-        // echo $amount . "\n";
-        $check = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
+        $transactionDate = date('Y-m-d H:i:s', strtotime($detailData['transaction_date']));
+        $remark = $detailData['remark'];
+        $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
-        if ($check) {
-            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
-            echo json_encode($return);
+        $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount'");
+
+        if ($checkInv) {
+            $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
+            $id_invoice = $rowInv['id_invoice'];
+            $setStatus = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
+
+            if ($setStatus) {
+                $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+
+                if ($savePayment) {
+                    $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
+                    echo json_encode($return);
+                } else {
+                    $return = ["response" => 200, "status" => "failed", "message" => "Status set but payment is not saved yet", "detail" => mysqli_error($conn)];
+                    echo json_encode($return);
+                }
+            } else {
+                $return = ["response" => 200, "status" => "failed", "message" => "Failed to set status payment", "detail" => mysqli_error($conn)];
+                echo json_encode($return);
+            }
         } else {
-            $return = ["response" => 200, "status" => "failed", "message" => mysqli_error($conn)];
-            echo json_encode($return);
+            $id_invoice = 0;
+            $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+
+            if ($savePayment) {
+                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
+                echo json_encode($return);
+            } else {
+                $return = ["response" => 200, "status" => "failed", "message" => "Failed to save payment", "detail" => mysqli_error($conn)];
+                echo json_encode($return);
+            }
         }
     }
 }
