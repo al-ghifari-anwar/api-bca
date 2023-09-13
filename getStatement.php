@@ -19,7 +19,7 @@ $oauth_token = $rowToken['bca_token'];
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\TH:i:sP');
 $toDate = date('Y-m-d\TH:i:sP');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"bankCardToken\": \"0611106351\",\"fromDateTime\": \"2023-09-12T00:00:00+07:00\",\"toDateTime\": \"2023-09-12T00:00:00+07:00\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"fromDateTime\": \"2023-09-12T00:00:00+07:00\",\"toDateTime\": \"2023-09-12T00:00:00+07:00\"}";
 $body = json_decode($bodyStr, true);
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
@@ -51,7 +51,6 @@ curl_setopt_array($curl, array(
     CURLOPT_POSTFIELDS => '{
  "partnerReferenceNo": "' . $partnerReferenceNo . '",
  "accountNo": "8880762231",
- "bankCardToken": "0611106351",
  "fromDateTime": "2023-09-12T00:00:00+07:00",
  "toDateTime": "2023-09-12T00:00:00+07:00"
 }',
