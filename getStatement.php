@@ -115,11 +115,11 @@ foreach ($detailData as $detailData) {
             $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
 
             if ($rowPayment) {
-                $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
-
                 $return = ["response" => 200, "status" => "failed", "message" => "Payment already saved", "detail" => mysqli_error($conn)];
                 echo json_encode($return);
             } else {
+                $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+
                 if ($savePayment) {
                     $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
                     echo json_encode($return);
