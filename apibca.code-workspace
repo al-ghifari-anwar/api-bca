@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "SSH FS - bca-topmortar",
+			"uri": "ssh://bca-topmortar/home/admin/web/apibca.topmortarindonesia.com/public_html"
+		}
+	],
+	"settings": {}
+}
