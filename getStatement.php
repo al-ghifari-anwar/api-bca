@@ -111,7 +111,7 @@ foreach ($detailData as $detailData) {
         } else {
             $id_invoice = 0;
 
-            $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE amount_payment = '$amount'");
+            $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark'");
             $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
 
             if ($rowPayment) {
