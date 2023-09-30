@@ -81,7 +81,7 @@ foreach ($detailData as $detailData) {
         $remark = $detailData['remark'];
         $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
-        $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount'");
+        $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount' AND status_invoice = 'waiting'");
         $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
 
         if ($rowInv) {
