@@ -72,73 +72,73 @@ curl_close($curl);
 
 $res = json_decode($response, true);
 $detailData = $res['detailData'];
-// echo json_encode($detailData);
+echo json_encode($detailData);
 
-foreach ($detailData as $detailData) {
-    if ($detailData['type'] == 'CREDIT') {
-        $amount = (int)$detailData['amount']['value'];
-        $transactionDate = date('Y-m-d H:i:s');
-        $remark = $detailData['remark'] . " - ID: " . $detailData['transactionId'];
-        $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
+// foreach ($detailData as $detailData) {
+//     if ($detailData['type'] == 'CREDIT') {
+//         $amount = (int)$detailData['amount']['value'];
+//         $transactionDate = date('Y-m-d H:i:s');
+//         $remark = $detailData['remark'] . " - ID: " . $detailData['transactionId'];
+//         $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
-        $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount' AND status_invoice = 'waiting'");
-        $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
+//         $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount' AND status_invoice = 'waiting'");
+//         $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
 
-        if ($rowInv) {
-            $id_invoice = $rowInv['id_invoice'];
+//         if ($rowInv) {
+//             $id_invoice = $rowInv['id_invoice'];
 
-            if ($rowInv['status_invoice'] == 'waiting') {
+//             if ($rowInv['status_invoice'] == 'waiting') {
 
-                $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark'");
-                $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
+//                 $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark'");
+//                 $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
 
-                if ($rowPayment) {
-                    $return = ["response" => 200, "status" => "failed", "message" => "Payment already saved", "detail" => mysqli_error($conn)];
-                    echo json_encode($return);
-                } else {
-                    $setStatus = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
+//                 if ($rowPayment) {
+//                     $return = ["response" => 200, "status" => "failed", "message" => "Payment already saved", "detail" => mysqli_error($conn)];
+//                     echo json_encode($return);
+//                 } else {
+//                     $setStatus = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
 
-                    if ($setStatus) {
-                        $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+//                     if ($setStatus) {
+//                         $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
 
-                        if ($savePayment) {
-                            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
-                            echo json_encode($return);
-                        } else {
-                            $return = ["response" => 200, "status" => "failed", "message" => "Status set but payment is not saved yet", "detail" => mysqli_error($conn)];
-                            echo json_encode($return);
-                        }
-                    } else {
-                        $return = ["response" => 200, "status" => "failed", "message" => "Failed to set status payment", "detail" => mysqli_error($conn)];
-                        echo json_encode($return);
-                    }
-                }
-            } else {
-                $return = ["response" => 200, "status" => "failed", "message" => "Invoice already paid", "detail" => mysqli_error($conn)];
-                echo json_encode($return);
-            }
-        } else {
-            $id_invoice = 0;
+//                         if ($savePayment) {
+//                             $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
+//                             echo json_encode($return);
+//                         } else {
+//                             $return = ["response" => 200, "status" => "failed", "message" => "Status set but payment is not saved yet", "detail" => mysqli_error($conn)];
+//                             echo json_encode($return);
+//                         }
+//                     } else {
+//                         $return = ["response" => 200, "status" => "failed", "message" => "Failed to set status payment", "detail" => mysqli_error($conn)];
+//                         echo json_encode($return);
+//                     }
+//                 }
+//             } else {
+//                 $return = ["response" => 200, "status" => "failed", "message" => "Invoice already paid", "detail" => mysqli_error($conn)];
+//                 echo json_encode($return);
+//             }
+//         } else {
+//             $id_invoice = 0;
 
-            $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark'");
-            $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
+//             $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark'");
+//             $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
 
-            if ($rowPayment) {
-                $return = ["response" => 200, "status" => "failed", "message" => "Payment already saved", "detail" => mysqli_error($conn)];
-                echo json_encode($return);
-            } else {
-                $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+//             if ($rowPayment) {
+//                 $return = ["response" => 200, "status" => "failed", "message" => "Payment already saved", "detail" => mysqli_error($conn)];
+//                 echo json_encode($return);
+//             } else {
+//                 $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
 
-                if ($savePayment) {
-                    $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
-                    echo json_encode($return);
-                } else {
-                    $return = ["response" => 200, "status" => "failed", "message" => "Failed to save payment", "detail" => mysqli_error($conn)];
-                    echo json_encode($return);
-                }
-            }
-        }
-    }
-}
-//
-// echo $response;
+//                 if ($savePayment) {
+//                     $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
+//                     echo json_encode($return);
+//                 } else {
+//                     $return = ["response" => 200, "status" => "failed", "message" => "Failed to save payment", "detail" => mysqli_error($conn)];
+//                     echo json_encode($return);
+//                 }
+//             }
+//         }
+//     }
+// }
+
+echo $response;
