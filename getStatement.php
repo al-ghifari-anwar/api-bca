@@ -99,7 +99,7 @@ foreach ($detailData as $detailData) {
                     $setStatus = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
 
                     if ($setStatus) {
-                        $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+                        $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice, source) VALUES($amount,'$transactionDate','$remark',$id_invoice, '8880762231')");
 
                         if ($savePayment) {
                             $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
