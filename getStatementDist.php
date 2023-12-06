@@ -128,7 +128,7 @@ foreach ($detailData as $detailData) {
                 $return = ["response" => 200, "status" => "failed", "message" => "Payment already saved", "detail" => mysqli_error($conn)];
                 echo json_encode($return);
             } else {
-                $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice) VALUES($amount,'$transactionDate','$remark',$id_invoice)");
+                $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice,source) VALUES($amount,'$transactionDate','$remark',$id_invoice,'8880964519')");
 
                 if ($savePayment) {
                     $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
