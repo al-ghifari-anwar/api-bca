@@ -21,6 +21,7 @@ $fromDate = date('2023-01-20\T00:00:00P');
 $toDate = date('2023-01-20\T00:00:00P');
 $bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"fromDateTime\": \"$fromDate\",\"toDateTime\": \"$toDate\"}";
 $body = json_decode($bodyStr, true);
+echo $fromDate;
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
 // $signatureOauth = $signatureUtil->generateOauthSignature($private_key, $client_id, $time_stamp);
