@@ -17,11 +17,11 @@ $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
 $oauth_token = $rowToken['bca_token'];
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
-$fromDate = date('2023-01-20\T00:00:00P');
-$toDate = date('2023-01-20\T00:00:00P');
+$fromDate = date('2024-01-20\T00:00:00P');
+$toDate = date('2024-01-20\T00:00:00P');
 $bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880762231\",\"fromDateTime\": \"$fromDate\",\"toDateTime\": \"$toDate\"}";
 $body = json_decode($bodyStr, true);
-echo $fromDate;
+// echo $fromDate;
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
 // $signatureOauth = $signatureUtil->generateOauthSignature($private_key, $client_id, $time_stamp);
