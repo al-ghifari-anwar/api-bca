@@ -17,8 +17,8 @@ $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
 $oauth_token = $rowToken['bca_token'];
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
-$fromDate = date('Y-m-d\T00:00:00P');
-$toDate = date('Y-m-d\T00:00:00P');
+$fromDate = date('2024-03-24\T00:00:00P');
+$toDate = date('2024-03-24\T00:00:00P');
 $bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"accountNo\": \"8880964519\",\"fromDateTime\": \"$fromDate\",\"toDateTime\": \"$toDate\"}";
 $body = json_decode($bodyStr, true);
 
