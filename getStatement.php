@@ -98,7 +98,13 @@ foreach ($detailData as $detailData) {
                 } else {
                     $setStatus = mysqli_query($conn, "UPDATE tb_invoice SET status_invoice = 'paid' WHERE total_invoice = '$amount'");
 
+                    $getInvoice = mysqli_query($conn, "SELECT * FROM tb_invoice JOIN tb_surat_jalan ON tb_surat_jalan.id_surat_jalan = tb_invoice.id_surat_jalan WHERE tb_invoice.total_invoice = '$amount'");
+                    $invArray = $getInvoice->fetch_array();
+                    $id_contact = $invArray['id_contact'];
+
                     if ($setStatus) {
+                        $removeRenvis = mysqli_query($conn, "UPDATE tb_rencana_visit SET is_visited = 1, visit_date = '$date' WHERE id_contact = '$id_contact' AND type_rencana = 'jatem'");
+
                         $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice, source) VALUES($amount,'$transactionDate','$remark',$id_invoice, '8880762231')");
 
                         if ($savePayment) {
