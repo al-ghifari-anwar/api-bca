@@ -78,7 +78,7 @@ foreach ($detailData as $detailData) {
     if ($detailData['type'] == 'CREDIT') {
         $amount = (int)$detailData['amount']['value'];
         $transactionDate = date('Y-m-d H:i:s');
-        $remark = $detailData['remark'] . " - Date: " . $detailData['transactionDate'];
+        $remark = str_replace("'", " ", $detailData['remark']) . " - Date: " . $detailData['transactionDate'];
         $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
         $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount' AND status_invoice = 'waiting'");
