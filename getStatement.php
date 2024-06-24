@@ -107,7 +107,7 @@ foreach ($detailData as $detailData) {
                         $id_inv = $invArray['id_invoice'];
                         $removeRenvis = mysqli_query($conn, "UPDATE tb_rencana_visit SET is_visited = 1, visit_date = '$date' WHERE id_contact = '$id_contact' AND type_rencana = 'jatem'");
 
-                        $removeRenvisTagihan = mysqli_query($conn, "UPDATE tb_renvis_jatem SET is_visited = 1, visit_date = '$date' WHERE id_invoice = '$id_inv'");
+                        $removeRenvisTagihan = mysqli_query($conn, "UPDATE tb_renvis_jatem SET is_visited = 1, visit_date = '$date' WHERE id_invoice = '$id_invoice'");
 
                         $savePayment = mysqli_query($conn, "INSERT INTO tb_payment(amount_payment,date_payment,remark_payment,id_invoice, source) VALUES($amount,'$transactionDate','$remark',$id_invoice, '8880762231')");
 
