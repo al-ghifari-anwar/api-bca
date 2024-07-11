@@ -14,7 +14,7 @@ $method = "POST";
 $url = "/openapi/v2.0/transfer-interbank";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = "nk33NUbXXv5tdE3qnN3CzF7vQn1PlEGcA0FwWlT3ju29fGbmc9IUrk";
+$oauth_token = "63yHYgJQYO74CkDaV5BuJgYk4BpBL8QxQqWhGYeRwC9R30roJDUePq";
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('2024-05-18\T00:00:00P');
