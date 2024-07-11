@@ -19,7 +19,7 @@ $oauth_token = "ac0dP2GL4gvitA5D8h3GAq0fApmZ6uw2oRhicC6CK5RwpFNgNNZhvg";
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('2024-05-18\T00:00:00P');
 $toDate = date('2024-05-18\T00:00:00P');
-$bodyStr = "{\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryAccountName\": \"Yories Yolanda\",\"sourceAccountNo\": \"0611102380\",\"value\": \"10000.00\",\"currency\": \"IDR\"}";
+$bodyStr = "{\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryAccountName\": \"Yories Yolanda\",\"sourceAccountNo\": \"0611102380\",\"value\": \"10000.00\",\"currency\": \"IDR\",\"partnerReferenceNo\": \"$partnerReferenceNo\"}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -54,7 +54,8 @@ curl_setopt_array($curl, array(
  "beneficiaryAccountName": "Yories Yolanda",
  "sourceAccountNo": "' . "0611102380" . '",
  "value": "' . "10000.00" . '",
- "currency": "IDR"
+ "currency": "IDR",
+ "partnerReferenceNo:" "' . $partnerReferenceNo . '"
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
