@@ -14,12 +14,12 @@ $method = "POST";
 $url = "/openapi/v2.0/transfer-interbank";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = "as77Z594YyXRBtI6FkLJXSsVA2K4d1QnX42k2ZyGRsOPxyKCq1kFza";
+$oauth_token = "y4SS4PoWnXqjz3dkz3LQafGiI2VLgpVLfAHGncnaXd3ojmP5b2J6kk";
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('2024-05-18\T00:00:00P');
 $toDate = date('2024-05-18\T00:00:00P');
-$bodyStr = "{\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryAccountName\": \"Yories Yolanda\",\"sourceAccountNo\": \"0611102380\",\"value\": \"10000.00\",\"currency\": \"IDR\",\"partnerReferenceNo\": \"$partnerReferenceNo\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"Yories Yolanda\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"002\",\"sourceAccountNo\": \"0611102380\",\"transactionDate\": \"$time_stamp\"}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -50,12 +50,16 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => '{
- "beneficiaryAccountNo": "' . "888801000157508" . '",
+ "partnerReferenceNo": "' . $partnerReferenceNo . '",
+ "amount":{
+    "value": "10000.00",
+    "currency": "IDR"
+ }
  "beneficiaryAccountName": "Yories Yolanda",
+ "beneficiaryAccountNo": "' . "888801000157508" . '",
+ "beneficiaryBankCode": "022"
  "sourceAccountNo": "' . "0611102380" . '",
- "value": "' . "10000.00" . '",
- "currency": "IDR",
- "partnerReferenceNo:" "' . $partnerReferenceNo . '"
+ "transactionDate": "' . $time_stamp . '"
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
