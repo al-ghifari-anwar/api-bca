@@ -14,7 +14,7 @@ $method = "POST";
 $url = "/openapi/v2.0/transfer-intrabank";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = $rowToken['bca_token'];
+$oauth_token = "ylJHEWO098XO885gFqOpp79wjtm5UIdp3Jygi5exDRHt9hyu3m02Pg";
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('2024-05-18\T00:00:00P');
@@ -41,7 +41,7 @@ $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://api.klikbca.com/openapi/v1.0/bank-statement',
+    CURLOPT_URL => 'https://simulator.api.bca.co.id/openapi/v2.0/transfer-interbank',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
