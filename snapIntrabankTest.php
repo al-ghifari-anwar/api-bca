@@ -19,7 +19,7 @@ $oauth_token = "y4SS4PoWnXqjz3dkz3LQafGiI2VLgpVLfAHGncnaXd3ojmP5b2J6kk";
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('2024-05-18\T00:00:00P');
 $toDate = date('2024-05-18\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"Yories Yolanda\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"002\",\"sourceAccountNo\": \"0611102380\",\"transactionDate\": \"$time_stamp\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"Yories Yolanda\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"002\",\"sourceAccountNo\": \"0611102380\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"transferType\": \"1\",\"purposeCode\": \"1\"}}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -57,9 +57,13 @@ curl_setopt_array($curl, array(
  }
  "beneficiaryAccountName": "Yories Yolanda",
  "beneficiaryAccountNo": "' . "888801000157508" . '",
- "beneficiaryBankCode": "022"
+ "beneficiaryBankCode": "002"
  "sourceAccountNo": "' . "0611102380" . '",
- "transactionDate": "' . $time_stamp . '"
+ "transactionDate": "' . $time_stamp . '",
+ "additionalInfo":{
+    "transferType":"1",
+    "purposeCode":""
+ }
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
