@@ -69,7 +69,7 @@ curl_setopt_array($curl, array(
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
-        'X-PARTNER-ID: UATCORP001',
+        'X-PARTNER-ID: UATCORP00100',
         // 'X-CLIENT-KEY: ' . $client_id,
         // 'Content-Type: application/json',
         'Authorization: Bearer ' . $oauth_token,
