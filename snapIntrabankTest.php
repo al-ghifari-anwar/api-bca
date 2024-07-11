@@ -46,7 +46,7 @@ curl_setopt_array($curl, array(
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
     CURLOPT_TIMEOUT => 0,
-    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_RETURNTRANSFER => 0,
     CURLOPT_HEADER => 1,
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -69,7 +69,7 @@ curl_setopt_array($curl, array(
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
-        'X-PARTNER-ID: UATCORP00100',
+        'X-PARTNER-ID: UATCORP001',
         // 'X-CLIENT-KEY: ' . $client_id,
         // 'Content-Type: application/json',
         'Authorization: Bearer ' . $oauth_token,
@@ -90,7 +90,7 @@ curl_close($curl);
 $res = json_decode($response, true);
 
 echo $response;
-echo $header;
+// echo $header;
 // echo $time_stamp . "<br>";
 // echo $signatureApi;
 // $detailData = $res['detailData'];
