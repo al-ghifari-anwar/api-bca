@@ -72,7 +72,7 @@ curl_setopt_array($curl, array(
         // 'Content-Type: application/json',
         'Authorization: Bearer ' . $oauth_token,
         // 'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
-        // 'X-TIMESTAMP: ' . $time_stamp,
+        'X-TIMESTAMP: ' . $time_stamp,
         // 'X-SIGNATURE: ' . $signatureApi
     ),
 ));
