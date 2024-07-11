@@ -50,7 +50,7 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => '{
- "partnerReferenceNo": "' . $partnerReferenceNo . '",
+ "partnerReferenceNo": "9901",
  "amount":{
     "value": "10000.00",
     "currency": "IDR"
