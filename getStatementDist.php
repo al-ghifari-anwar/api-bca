@@ -82,7 +82,7 @@ foreach ($detailData as $detailData) {
         $remark = $detailData['remark'] . " - Date: " . $detailData['transactionDate'];
         $arrResponse = ['amount' => $amount, 'date' => $transactionDate, 'remark' => $remark];
 
-        $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice WHERE total_invoice = '$amount' AND status_invoice = 'waiting'");
+        $checkInv = mysqli_query($conn, "SELECT * FROM tb_invoice JOIN tb_surat_jalan ON tb_surat_jalan.id_surat_jalan = tb_invoice.id_surat_jalan JOIN tb_contact ON tb_contact.id_contact = tb_surat_jalan.id_contact JOIN tb_city ON tb_city.id_city = tb_contact.id_city WHERE total_invoice = '$amount' AND status_invoice = 'waiting' AND tb_city.id_distributor = 1");
         $rowInv = $checkInv->fetch_array(MYSQLI_ASSOC);
 
         if ($rowInv) {
