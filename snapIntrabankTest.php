@@ -41,7 +41,7 @@ $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://simulator.api.bca.co.id/openapi/v2.0/transfer-interbank',
+    CURLOPT_URL => 'https://simulator.api.bca.co.id/openapi/v1.0/transfer-interbank',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
