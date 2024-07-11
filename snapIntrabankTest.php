@@ -50,10 +50,11 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => '{
- "partnerReferenceNo": "' . $partnerReferenceNo . '",
- "accountNo": "8880762231",
- "fromDateTime": "' . $fromDate . '",
- "toDateTime": "' . $toDate . '"
+ "beneficiaryAccountNo": "' . "888801000157508" . '",
+ "beneficiaryAccountName": "Yories Yolanda",
+ "sourceAccountNo": "' . "0611102380" . '",
+ "value": "' . "10000.00" . '",
+ "currency": "IDR"
 }',
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
@@ -72,7 +73,8 @@ $response = curl_exec($curl);
 curl_close($curl);
 
 $res = json_decode($response, true);
-$detailData = $res['detailData'];
+echo $response;
+// $detailData = $res['detailData'];
 // echo json_encode($detailData);
 
 // foreach ($detailData as $detailData) {
@@ -141,5 +143,3 @@ $detailData = $res['detailData'];
 //         }
 //     }
 // }
-
-echo $response;
