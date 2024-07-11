@@ -56,7 +56,7 @@ curl_setopt_array($curl, array(
     "currency": "IDR"
  },
  "beneficiaryAccountName": "Yories Yolanda",
- "beneficiaryAccountNo": "' . "888801000157508" . '",
+ "beneficiaryAccountNo": "' . 888801000157508 . '",
  "beneficiaryBankCode": "002"
  "sourceAccountNo": "' . "0611102380" . '",
  "transactionDate": "' . $time_stamp . '",
