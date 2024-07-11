@@ -79,18 +79,12 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-$header = substr($response, 0, $header_size);
-$body = substr($response, $header_size);
-
 curl_close($curl);
 
 $res = json_decode($response, true);
-echo $response;
 
-
-
-echo $body;
+echo $time_stamp . "<br>";
+echo $signatureApi;
 // $detailData = $res['detailData'];
 // echo json_encode($detailData);
 
