@@ -71,7 +71,7 @@ curl_setopt_array($curl, array(
         'CHANNEL-ID: 95051',
         'X-PARTNER-ID: UATCORP001',
         'X-CLIENT-KEY: ' . $client_id,
-        // 'Content-Type: application/json',
+        'Content-Type: application/json',
         'Authorization: Bearer ' . $oauth_token,
         'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
         'X-TIMESTAMP: ' . $time_stamp,
@@ -81,9 +81,9 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-$header = substr($response, 0, $header_size);
-$body = substr($response, $header_size);
+// $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+// $header = substr($response, 0, $header_size);
+// $body = substr($response, $header_size);
 
 curl_close($curl);
 
