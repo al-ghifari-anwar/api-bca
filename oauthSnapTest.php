@@ -48,8 +48,9 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
-echo $time_stamp;
-echo $signatureOauth;
+// echo $time_stamp;
+// echo $signatureOauth;
+echo $response;
 
 // curl_close($curl);
 
