@@ -50,7 +50,7 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => '{
- "partnerReferenceNo": "9901",
+ "partnerReferenceNo": "' . $partnerReferenceNo . '",
  "amount":{
     "value": "10000.00",
     "currency": "IDR"
@@ -83,8 +83,9 @@ curl_close($curl);
 
 $res = json_decode($response, true);
 
-echo $time_stamp . "<br>";
-echo $signatureApi;
+echo $response;
+// echo $time_stamp . "<br>";
+// echo $signatureApi;
 // $detailData = $res['detailData'];
 // echo json_encode($detailData);
 
