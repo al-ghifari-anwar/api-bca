@@ -90,7 +90,7 @@ curl_close($curl);
 $res = json_decode($response, true);
 
 echo $response;
-echo $header;
+// echo $header;
 // echo $time_stamp . "<br>";
 // echo $signatureApi;
 // $detailData = $res['detailData'];
