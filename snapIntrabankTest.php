@@ -88,7 +88,7 @@ $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
 $header = substr($response, 0, $header_size);
 $body = substr($response, $header_size);
 
-echo $header;
+echo $body;
 // $detailData = $res['detailData'];
 // echo json_encode($detailData);
 
