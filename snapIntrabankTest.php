@@ -70,10 +70,10 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTPHEADER => array(
         'CHANNEL-ID: 95051',
         'X-PARTNER-ID: UATCORP001',
-        // 'X-CLIENT-KEY: ' . $client_id,
+        'X-CLIENT-KEY: ' . $client_id,
         // 'Content-Type: application/json',
         'Authorization: Bearer ' . $oauth_token,
-        // 'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
+        'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
         'X-TIMESTAMP: ' . $time_stamp,
         'X-SIGNATURE: ' . $signatureApi
     ),
