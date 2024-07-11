@@ -46,6 +46,8 @@ curl_setopt_array($curl, array(
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
     CURLOPT_TIMEOUT => 0,
+    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_HEADER => 1,
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
@@ -79,11 +81,15 @@ curl_setopt_array($curl, array(
 
 $response = curl_exec($curl);
 
+$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+$header = substr($response, 0, $header_size);
+$body = substr($response, $header_size);
+
 curl_close($curl);
 
 $res = json_decode($response, true);
 
-echo $response;
+echo $header;
 // echo $time_stamp . "<br>";
 // echo $signatureApi;
 // $detailData = $res['detailData'];
