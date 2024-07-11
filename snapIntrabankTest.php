@@ -83,6 +83,12 @@ curl_close($curl);
 
 $res = json_decode($response, true);
 echo $response;
+
+$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+$header = substr($response, 0, $header_size);
+$body = substr($response, $header_size);
+
+echo $header;
 // $detailData = $res['detailData'];
 // echo json_encode($detailData);
 
