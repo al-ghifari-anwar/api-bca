@@ -48,6 +48,7 @@ curl_setopt_array($curl, array(
     CURLOPT_TIMEOUT => 0,
     CURLOPT_RETURNTRANSFER => 1,
     CURLOPT_HEADER => 1,
+    CURLINFO_HEADER_OUT => 1,
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
@@ -94,6 +95,7 @@ echo $response;
 
 $info = curl_getinfo($curl);
 print_r($info);
+print_r($info['request_header']);
 // echo $header;
 // echo $time_stamp . "<br>";
 // echo $signatureApi;
