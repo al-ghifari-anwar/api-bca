@@ -53,20 +53,20 @@ curl_setopt_array($curl, array(
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
     CURLOPT_POSTFIELDS => '{
- "partnerReferenceNo": "' . $partnerReferenceNo . '",
- "amount":{
+  "partnerReferenceNo": "' . $partnerReferenceNo . '",
+  "amount": {
     "value": "10000.00",
     "currency": "IDR"
- },
- "beneficiaryAccountName": "Yories Yolanda",
- "beneficiaryAccountNo": "' . 888801000157508 . '",
- "beneficiaryBankCode": "002",
- "sourceAccountNo": "0611102380",
- "transactionDate": "' . $time_stamp . '",
- "additionalInfo":{
-    "transferType":"1",
-    "purposeCode":""
- }
+  },
+  "beneficiaryAccountName": "Yories Yolanda",
+  "beneficiaryAccountNo": "888801000157508",
+  "beneficiaryBankCode": "002",
+  "sourceAccountNo": "0611102380",
+  "transactionDate": "' . $time_stamp . '",
+  "additionalInfo": {
+    "transferType": "1",
+    "purposeCode": "1"
+  }
 }',
     CURLOPT_HTTPHEADER => array(
         'Authorization: Bearer ' . $oauth_token,
@@ -86,6 +86,23 @@ $response = curl_exec($curl);
 // $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
 // $header = substr($response, 0, $header_size);
 // $body = substr($response, $header_size);
+
+// $a = '{
+//  "partnerReferenceNo": "' . $partnerReferenceNo . '",
+//  "amount":{
+//     "value": "10000.00",
+//     "currency": "IDR"
+//  },
+//  "beneficiaryAccountName": "Yories Yolanda",
+//  "beneficiaryAccountNo": "' . 888801000157508 . '",
+//  "beneficiaryBankCode": "002",
+//  "sourceAccountNo": "0611102380",
+//  "transactionDate": "' . $time_stamp . '",
+//  "additionalInfo":{
+//     "transferType":"1",
+//     "purposeCode":""
+//  }
+// }'
 
 curl_close($curl);
 
