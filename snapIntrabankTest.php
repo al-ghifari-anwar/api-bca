@@ -14,7 +14,7 @@ $method = "POST";
 $url = "/openapi/v2.0/transfer-interbank";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = '6XhzzxnOUqOvUJa52By131zjdXBO9zWh41Og6qUVDIMmxqmA9MYeIb';
+$oauth_token = '31tke1K0C61njdK3MViIy4DsEWu7yz2h7mm3RuuTXIMw6O7dMM2Bgb';
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
@@ -61,7 +61,7 @@ curl_setopt_array($curl, array(
  "beneficiaryAccountName": "Yories Yolanda",
  "beneficiaryAccountNo": "' . 888801000157508 . '",
  "beneficiaryBankCode": "002",
- "sourceAccountNo": "' . "0611102380" . '",
+ "sourceAccountNo": "0611102380",
  "transactionDate": "' . $time_stamp . '",
  "additionalInfo":{
     "transferType":"1",
