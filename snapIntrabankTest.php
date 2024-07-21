@@ -60,7 +60,7 @@ curl_setopt_array($curl, array(
   },
   "beneficiaryAccountName": "Yories Yolanda",
   "beneficiaryAccountNo": "888801000157508",
-  "beneficiaryBankCode": "002",
+  "beneficiaryBankCode": "014",
   "sourceAccountNo": "0611102380",
   "transactionDate": "' . $time_stamp . '",
   "additionalInfo": {
