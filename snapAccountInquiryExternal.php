@@ -14,12 +14,12 @@ $method = "POST";
 $url = "/openapi/v1.0/account-inquiry-external";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = 'qzT1c2zACO2vkxTecQnUSsUhwEp9NgS7LkHqBVaWALb4OD01mI6XDq.';
+$oauth_token = 'qzT1c2zACO2vkxTecQnUSsUhwEp9NgS7LkHqBVaWALb4OD01mI6XDq';
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"789\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"beneficiaryAccountNo\": \"8888010001575081\",\"beneficiaryBankCode\": \"789\"}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
