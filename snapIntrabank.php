@@ -19,7 +19,7 @@ $oauth_token = 'Bf2rV6Y2Y1yerupWdPO99hHxdhXZcl0sR77FTbgA5QeEHtLe1rRy1d';
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"100.00\",\"currency\": \"USD\"},\"beneficiaryAccountNo\": \"0611102380\",\"remark\": \"remark\",\"sourceAccountNo\": \"0613331261\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"economicActivity\": \"Biaya Hidup Pihak Asing\",\"transactionPurpose\": \"01\"}}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountNo\": \"0613331228\",\"remark\": \"remark\",\"sourceAccountNo\": \"0611102380\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"economicActivity\": \"Biaya Hidup Pihak Asing\",\"transactionPurpose\": \"01\"}}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -55,12 +55,12 @@ curl_setopt_array($curl, array(
     CURLOPT_POSTFIELDS => '{
   "partnerReferenceNo": "' . $partnerReferenceNo . '",
   "amount": {
-    "value": "100.00",
-    "currency": "USD"
+    "value": "10000.00",
+    "currency": "IDR"
   },
-  "beneficiaryAccountNo": "0611102380",
+  "beneficiaryAccountNo": "0613331228",
   "remark":"remark",
-  "sourceAccountNo": "0613331261",
+  "sourceAccountNo": "0611102380",
   "transactionDate": "' . $time_stamp . '",
   "additionalInfo": {
     "economicActivity": "Biaya Hidup Pihak Asing",
@@ -89,13 +89,13 @@ $response = curl_exec($curl);
 // $a = '{
 //  "partnerReferenceNo": "' . $partnerReferenceNo . '",
 //  "amount":{
-//     "value": "100.00",
-//     "currency": "USD"
+//     "value": "10000.00",
+//     "currency": "IDR"
 //  },
 //  "beneficiaryAccountName": "Yories Yolanda",
-//  "beneficiaryAccountNo": "' . 0611102380 . '",
+//  "beneficiaryAccountNo": "' . 0613331228 . '",
 //  "beneficiaryBankCode": "002",
-//  "sourceAccountNo": "0613331261",
+//  "sourceAccountNo": "0611102380",
 //  "transactionDate": "' . $time_stamp . '",
 //  "additionalInfo":{
 //     "economicActivity":"1",
