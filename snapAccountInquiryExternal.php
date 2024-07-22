@@ -19,7 +19,7 @@ $oauth_token = 'qzT1c2zACO2vkxTecQnUSsUhwEp9NgS7LkHqBVaWALb4OD01mI6XDq';
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"789\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"\"}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -55,7 +55,7 @@ curl_setopt_array($curl, array(
     CURLOPT_POSTFIELDS => '{
   "partnerReferenceNo": "' . $partnerReferenceNo . '",
   "beneficiaryAccountNo": "888801000157508",
-  "beneficiaryBankCode": "789"
+  "beneficiaryBankCode": ""
 }',
     CURLOPT_HTTPHEADER => array(
         'Authorization: Bearer ' . $oauth_token,
@@ -65,7 +65,7 @@ curl_setopt_array($curl, array(
         'X-SIGNATURE: ' . $signatureApi,
         'ORIGIN: ' . 'topmortarindonesia.com',
         'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
-        'X-PARTNER-ID: UATCORP0011',
+        'X-PARTNER-ID: UATCORP001',
         'X-CLIENT-KEY: ' . $client_id
     ),
 ));
