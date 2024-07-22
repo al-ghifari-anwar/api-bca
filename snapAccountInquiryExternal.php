@@ -14,7 +14,7 @@ $method = "POST";
 $url = "/openapi/v1.0/account-inquiry-external";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = 'qzT1c2zACO2vkxTecQnUSsUhwEp9NgS7LkHqBVaWALb4OD01mI6XDq';
+$oauth_token = 'qzT1c2zACO2vkxTecQnUSsUhwEp9NgS7LkHqBVaWALb4OD01mI6XDq.';
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
@@ -64,7 +64,7 @@ curl_setopt_array($curl, array(
         'X-TIMESTAMP: ' . $time_stamp,
         'X-SIGNATURE: ' . $signatureApi,
         'ORIGIN: ' . 'topmortarindonesia.com',
-        'X-EXTERNAL-ID: ' . '001',
+        'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
         'X-PARTNER-ID: UATCORP001',
         'X-CLIENT-KEY: ' . $client_id
     ),
