@@ -64,7 +64,7 @@ curl_setopt_array($curl, array(
         'X-TIMESTAMP: ' . $time_stamp,
         'X-SIGNATURE: ' . $signatureApi,
         'ORIGIN: ' . 'topmortarindonesia.com',
-        'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
+        'X-EXTERNAL-ID: ' . '001',
         'X-PARTNER-ID: UATCORP001',
         'X-CLIENT-KEY: ' . $client_id
     ),
