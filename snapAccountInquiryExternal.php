@@ -14,12 +14,12 @@ $method = "POST";
 $url = "/openapi/v1.0/account-inquiry-external";
 // $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
 // $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = '8sA815xH5fVVDnuMhS5XAD582FXNfT9lSzSsziSkb8waAfzric56qs';
+$oauth_token = 'iwGiVzSPtas68uOhw7YgPzOQnpyf2q4tFAdhnos1sL2n7ZbPNKnYCM';
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"ABALIDBS\"}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"BRINDIJA\"}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -55,7 +55,7 @@ curl_setopt_array($curl, array(
     CURLOPT_POSTFIELDS => '{
   "partnerReferenceNo": "' . $partnerReferenceNo . '",
   "beneficiaryAccountNo": "888801000157508",
-  "beneficiaryBankCode": "ABALIDBS",
+  "beneficiaryBankCode": "BRINDIJA",
 }',
     CURLOPT_HTTPHEADER => array(
         'Authorization: Bearer ' . $oauth_token,
