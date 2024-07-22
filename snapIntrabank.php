@@ -19,7 +19,7 @@ $oauth_token = 'r62kdnHgB3Hl6aKSDYquZwYK6OnKIaRyhcApvpQ7YWB9p3dO759Hkf';
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountNo\": \"0613105953\",\"remark\": \"remark\",\"sourceAccountNo\": \"0613106089\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"economicActivity\": \"Pengalihan milik penyertaan lsg\",\"transactionPurpose\": \"01\"}}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountNo\": \"0611115813\",\"remark\": \"remark\",\"sourceAccountNo\": \"0613106089\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"economicActivity\": \"Biaya Hidup Pihak Asing\"}}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -58,13 +58,12 @@ curl_setopt_array($curl, array(
     "value": "10000.00",
     "currency": "IDR"
   },
-  "beneficiaryAccountNo": "0613105953",
+  "beneficiaryAccountNo": "0611115813",
   "remark":"remark",
   "sourceAccountNo": "0613106089",
   "transactionDate": "' . $time_stamp . '",
   "additionalInfo": {
-    "economicActivity": "Pengalihan milik penyertaan lsg",
-    "transactionPurpose": "01"
+    "economicActivity": "Biaya Hidup Pihak Asing"
   }
 }',
     CURLOPT_HTTPHEADER => array(
@@ -93,7 +92,7 @@ $response = curl_exec($curl);
 //     "currency": "IDR"
 //  },
 //  "beneficiaryAccountName": "Yories Yolanda",
-//  "beneficiaryAccountNo": "' . 0613105953 . '",
+//  "beneficiaryAccountNo": "' . 0611115813 . '",
 //  "beneficiaryBankCode": "002",
 //  "sourceAccountNo": "0613106089",
 //  "transactionDate": "' . $time_stamp . '",
