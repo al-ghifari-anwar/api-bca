@@ -19,7 +19,7 @@ $oauth_token = 'hVTip00mU2DSOw3QW39W2exWtRFm49sIc7oqHnEcznlyqDD7YQT1pG';
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"Yories Yolanda\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"BRINDIJA\",\"sourceAccountNo\": \"1234567890\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"transferType\": \"1\",\"purposeCode\": \"1\"}}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"Yories Yolanda\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"BRINDIJA\",\"sourceAccountNo\": \"0611105893\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"transferType\": \"1\",\"purposeCode\": \"1\"}}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -61,7 +61,7 @@ curl_setopt_array($curl, array(
   "beneficiaryAccountName": "Yories Yolanda",
   "beneficiaryAccountNo": "888801000157508",
   "beneficiaryBankCode": "BRINDIJA",
-  "sourceAccountNo": "1234567890",
+  "sourceAccountNo": "0611105893",
   "transactionDate": "' . $time_stamp . '",
   "additionalInfo": {
     "transferType": "1",
@@ -96,7 +96,7 @@ $response = curl_exec($curl);
 //  "beneficiaryAccountName": "Yories Yolanda",
 //  "beneficiaryAccountNo": "' . 888801000157508 . '",
 //  "beneficiaryBankCode": "002",
-//  "sourceAccountNo": "1234567890",
+//  "sourceAccountNo": "0611105893",
 //  "transactionDate": "' . $time_stamp . '",
 //  "additionalInfo":{
 //     "transferType":"1",
