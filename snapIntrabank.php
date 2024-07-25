@@ -16,7 +16,7 @@ $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token =
 $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
 $oauth_token = $rowToken['bca_token'];
 // GET Value
-$amount = 10 * $_GET['qty'];
+$amount = number_format(10 * $_GET['qty'], 2, '.', '');
 $to_account = $_GET['to'];
 $remark = "Auto Transfer Test - " . $_GET['qty'] . " SAK";
 $from_account = "8881051362";
