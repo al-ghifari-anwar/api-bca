@@ -1,5 +1,5 @@
 <?php
-// include_once("config.php");
+include_once("config.php");
 // PLEASE ENABLE EXTENTION CURL OPENSSL
 require dirname(__FILE__) . '/com/bca/openapi/client/utils/SignatureUtil.php';
 
@@ -12,10 +12,10 @@ $private_key = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDOIYqwUxotB8su
 $time_stamp = date('Y-m-d\TH:i:sP');
 $method = "POST";
 $url = "/openapi/v1.0/transfer-intrabank";
-// $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
-// $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-// $oauth_token = $rowToken['bca_token'];
-$oauth_token = "adwadaw";
+$getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
+$rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
+$oauth_token = $rowToken['bca_token'];
+// $oauth_token = "adwadaw";
 // GET Value
 $amount = 10 * $_GET['qty'];
 $to_account = $_GET['to'];
