@@ -20,9 +20,11 @@ $id_city = $_GET['city'];
 $to_account = $_GET['to'];
 $qty = $_GET['qty'];
 $amount = number_format(10 * $_GET['qty'], 2, '.', '');
-$remark = "Auto Transfer Test - " . $_GET['qty'] . " SAK";
 $sj = $_GET['sj'];
 $from_account = "8881051362";
+$getSj = mysqli_query($conn, "SELECT * FROM tb_surat_jalan WHERE id_surat_jalan = '$sj'");
+$rowSj = $getSj->fetch_array(MYSQLI_ASSOC);
+$remark = "Auto Trnsfr Tst-" . $_GET['qty'] . "SAK-" . $rowSj['no_surat_jalan'];
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
@@ -128,6 +130,9 @@ if ($res['responseMessage'] == "Successful") {
     echo json_encode($return);
   }
 } else {
+  $transaction_date = date("Y-m-d H:i:s");
+  $saveLog = mysqli_query($conn, "INSERT INTO tb_log_bca_test(id_city,id_surat_jalan,norek_asal,qty_sak,amount_transfered, reference_no,transaction_date,remark) VALUES($id_city, $sj,'$from_account',$qty,'$amount','failed','$transaction_date','$remark')");
+
   $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
   echo json_encode($return);
 }
