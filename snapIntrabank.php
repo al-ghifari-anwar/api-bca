@@ -111,7 +111,7 @@ $res = json_decode($response, true);
 
 echo $response;
 
-$info = curl_getinfo($curl);
+// $info = curl_getinfo($curl);
 // print_r($info);
 // print_r($info['request_header']);
 // echo $header;
