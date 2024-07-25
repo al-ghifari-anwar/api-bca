@@ -17,8 +17,11 @@ $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
 $oauth_token = $rowToken['bca_token'];
 // GET Value
 $amount = number_format(10 * $_GET['qty'], 2, '.', '');
+$id_city = $_GET['city'];
 $to_account = $_GET['to'];
+$qty = $_GET['qty_sak'];
 $remark = "Auto Transfer Test - " . $_GET['qty'] . " SAK";
+$sj = $_GET['sj'];
 $from_account = "8881051362";
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
@@ -109,7 +112,25 @@ curl_close($curl);
 
 $res = json_decode($response, true);
 
-echo $response;
+// echo $response;
+
+if ($res['responseMessage'] == "Successful") {
+  $reference_no = $res['reference_no'];
+  $transaction_date = date("Y-m-d H:i:s", strtotime($res['transactionDate']));
+
+  $saveLog = mysqli_query($conn, "INSERT INTO tb_log_bca_test(id_city,id_surat_jalan,norek_asal,qty_sak,amount_transfered, reference_no,transaction_date,remark) VALUES($id_city, $sj,'$from_account',$qty,$amount,'$reference_no','$transaction_date','$remark')");
+
+  if ($saveLog) {
+    $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!"];
+    echo json_encode($return);
+  } else {
+    $return = ["response" => 200, "status" => "failed", "message" => "Success transfered but log not saved", "detail" => mysqli_error($conn)];
+    echo json_encode($return);
+  }
+} else {
+  $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
+  echo json_encode($return);
+}
 
 // $info = curl_getinfo($curl);
 // print_r($info);
