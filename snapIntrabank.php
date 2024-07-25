@@ -118,7 +118,7 @@ if ($res['responseMessage'] == "Successful") {
   $reference_no = $res['referenceNo'];
   $transaction_date = date("Y-m-d H:i:s", strtotime($res['transactionDate']));
 
-  $saveLog = mysqli_query($conn, "INSERT INTO tb_log_bca_test(id_city,id_surat_jalan,norek_asal,qty_sak,amount_transfered, reference_no,transaction_date,remark) VALUES($id_city, $sj,'$from_account',$qty,$amount,'$reference_no','$transaction_date','$remark')");
+  $saveLog = mysqli_query($conn, "INSERT INTO tb_log_bca_test(id_city,id_surat_jalan,norek_asal,qty_sak,amount_transfered, reference_no,transaction_date,remark) VALUES($id_city, $sj,'$from_account',$qty,'$amount','$reference_no','$transaction_date','$remark')");
 
   if ($saveLog) {
     $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!"];
