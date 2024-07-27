@@ -70,7 +70,7 @@ curl_setopt_array($curl, array(
   "beneficiaryAccountName": "' . $to_name . '",
   "beneficiaryAccountNo": "' . $to_account . '",
   "beneficiaryBankCode": "' . $bank_code . '",
-  "sourceAccountNo": "' . $bank_code . '",
+  "sourceAccountNo": "' . $from_account . '",
   "transactionDate": "' . $time_stamp . '",
   "additionalInfo": {
     "transferType": "2",
