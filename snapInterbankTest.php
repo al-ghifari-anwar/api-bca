@@ -117,7 +117,28 @@ curl_close($curl);
 
 $res = json_decode($response, true);
 
-echo $response;
+// echo $response;
+
+if ($res['responseMessage'] == "Successful") {
+  $reference_no = $res['referenceNo'];
+  $transaction_date = date("Y-m-d H:i:s", strtotime($res['transactionDate']));
+
+  $saveLog = mysqli_query($conn, "INSERT INTO tb_log_bca_test(id_city,id_surat_jalan,norek_asal,qty_sak,amount_transfered, reference_no,transaction_date,remark) VALUES($id_city, $sj,'$from_account',$qty,'$amount','$reference_no','$transaction_date','$remark')");
+
+  if ($saveLog) {
+    $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!"];
+    echo json_encode($return);
+  } else {
+    $return = ["response" => 200, "status" => "failed", "message" => "Success transfered but log not saved", "detail" => mysqli_error($conn)];
+    echo json_encode($return);
+  }
+} else {
+  $transaction_date = date("Y-m-d H:i:s");
+  $saveLog = mysqli_query($conn, "INSERT INTO tb_log_bca_test(id_city,id_surat_jalan,norek_asal,qty_sak,amount_transfered, reference_no,transaction_date,remark) VALUES($id_city, $sj,'$from_account',$qty,'$amount','failed','$transaction_date','$remark')");
+
+  $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
+  echo json_encode($return);
+}
 
 // $info = curl_getinfo($curl);
 // print_r($info);
