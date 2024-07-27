@@ -12,14 +12,26 @@ $private_key = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDOIYqwUxotB8su
 $time_stamp = date('Y-m-d\TH:i:sP');
 $method = "POST";
 $url = "/openapi/v2.0/transfer-interbank";
-// $getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
-// $rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
-$oauth_token = 'D6MipoTIgSk7jklbANBeJlJXHQRJ2o05bT045HhNA3S63wxbLoCRZA';
+$getToken = mysqli_query($conn, "SELECT * FROM tb_bca_token WHERE id_bca_token = 1");
+$rowToken = $getToken->fetch_array(MYSQLI_ASSOC);
+$oauth_token = $rowToken['bca_token'];
+// GET Value
+$id_city = $_GET['city'];
+$to_account = $_GET['to'];
+$qty = $_GET['qty'];
+$amount = number_format(1000 * $_GET['qty'], 2, '.', '');
+$sj = $_GET['sj'];
+$from_account = "8881051362";
+$getSj = mysqli_query($conn, "SELECT * FROM tb_surat_jalan WHERE id_surat_jalan = '$sj'");
+$rowSj = $getSj->fetch_array(MYSQLI_ASSOC);
+$remark = "Auto Trnsfr Tst-" . $_GET['qty'] . "SAK-" . $rowSj['no_surat_jalan'];
+$to_name = $_GET['to_name'];
+$bank_code = $_GET['bank_code'];
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
 $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
-$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"10000.00\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"Yories Yolanda\",\"beneficiaryAccountNo\": \"888801000157508\",\"beneficiaryBankCode\": \"BRINDIJA\",\"sourceAccountNo\": \"0611102380\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"transferType\": \"1\",\"purposeCode\": \"1\"}}";
+$bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"$amount\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"$to_name\",\"beneficiaryAccountNo\": \"$to_account\",\"beneficiaryBankCode\": \"$bank_code\",\"sourceAccountNo\": \"$from_account\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"transferType\": \"2\",\"purposeCode\": \"99\"}}";
 $body = json_decode($bodyStr, true);
 // echo $fromDate;
 
@@ -41,44 +53,44 @@ $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://simulator.api.bca.co.id/openapi/v2.0/transfer-interbank',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_RETURNTRANSFER => 1,
-    CURLOPT_HEADER => 1,
-    CURLINFO_HEADER_OUT => 1,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => '{
+  CURLOPT_URL => 'https://api.klikbca.com/openapi/v2.0/transfer-interbank',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_RETURNTRANSFER => 1,
+  CURLOPT_HEADER => 1,
+  CURLINFO_HEADER_OUT => 1,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => '{
   "partnerReferenceNo": "' . $partnerReferenceNo . '",
   "amount": {
-    "value": "10000.00",
+    "value": "' . $amount . '",
     "currency": "IDR"
   },
-  "beneficiaryAccountName": "Yories Yolanda",
-  "beneficiaryAccountNo": "888801000157508",
-  "beneficiaryBankCode": "BRINDIJA",
-  "sourceAccountNo": "0611102380",
+  "beneficiaryAccountName": "' . $to_name . '",
+  "beneficiaryAccountNo": "' . $to_account . '",
+  "beneficiaryBankCode": "' . $bank_code . '",
+  "sourceAccountNo": "' . $bank_code . '",
   "transactionDate": "' . $time_stamp . '",
   "additionalInfo": {
-    "transferType": "1",
-    "purposeCode": "1"
+    "transferType": "2",
+    "purposeCode": "99"
   }
 }',
-    CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer ' . $oauth_token,
-        'Content-Type: application/json',
-        'CHANNEL-ID: 95051',
-        'X-TIMESTAMP: ' . $time_stamp,
-        'X-SIGNATURE: ' . $signatureApi,
-        'ORIGIN: ' . 'topmortarindonesia.com',
-        'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
-        'X-PARTNER-ID: UATCORP001',
-        'X-CLIENT-KEY: ' . $client_id
-    ),
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer ' . $oauth_token,
+    'Content-Type: application/json',
+    'CHANNEL-ID: 95051',
+    'X-TIMESTAMP: ' . $time_stamp,
+    'X-SIGNATURE: ' . $signatureApi,
+    'ORIGIN: ' . 'topmortarindonesia.com',
+    'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
+    'X-PARTNER-ID: KBBTOPMORT',
+    'X-CLIENT-KEY: ' . $client_id
+  ),
 ));
 
 $response = curl_exec($curl);
