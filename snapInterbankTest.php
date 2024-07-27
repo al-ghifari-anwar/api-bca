@@ -1,5 +1,5 @@
 <?php
-// include_once("config.php");
+include_once("config.php");
 // PLEASE ENABLE EXTENTION CURL OPENSSL
 require dirname(__FILE__) . '/com/bca/openapi/client/utils/SignatureUtil.php';
 
@@ -33,7 +33,6 @@ $fromDate = date('Y-m-d\T00:00:00P');
 $toDate = date('Y-m-d\T00:00:00P');
 $bodyStr = "{\"partnerReferenceNo\": \"$partnerReferenceNo\",\"amount\": {\"value\": \"$amount\",\"currency\": \"IDR\"},\"beneficiaryAccountName\": \"$to_name\",\"beneficiaryAccountNo\": \"$to_account\",\"beneficiaryBankCode\": \"$bank_code\",\"sourceAccountNo\": \"$from_account\",\"transactionDate\": \"$time_stamp\",\"additionalInfo\": {\"transferType\": \"2\",\"purposeCode\": \"99\"}}";
 $body = json_decode($bodyStr, true);
-echo $body;
 // echo $fromDate;
 
 $signatureUtil = new \com\bca\openapi\client\utils\SignatureUtil;
