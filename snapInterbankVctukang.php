@@ -19,7 +19,7 @@ $oauth_token = $rowToken['bca_token'];
 $to_account = $_GET['to'];
 $amount = number_format(10000, 2, '.', '');
 $from_account = "8881051362";
-$remark = "Auto Trnsfr Vc Tkng -";
+$remark = "Auto Trf Vc Tkng -";
 $to_name = $_GET['to_name'];
 $bank_code = $_GET['bank_code'];
 // For Body
