@@ -89,7 +89,7 @@ foreach ($detailData as $detailData) {
 
             if ($rowInv['status_invoice'] == 'waiting') {
 
-                $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark' AND amount_payment = '$amount'");
+                $checkPayment = mysqli_query($conn, "SELECT * FROM tb_payment WHERE remark_payment = '$remark' AND id_invoice = 0");
                 $rowPayment = $checkPayment->fetch_array(MYSQLI_ASSOC);
 
                 if ($rowPayment) {
