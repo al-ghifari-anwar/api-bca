@@ -142,7 +142,7 @@ foreach ($detailData as $detailData) {
 
                             $resTf = json_decode($response, true);
 
-                            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!", "detail" => json_encode($resTf)];
+                            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!", "detail" => $resTf];
                             echo json_encode($return);
                         } else {
                             $return = ["response" => 200, "status" => "failed", "message" => "Status set but payment is not saved yet", "detail" => mysqli_error($conn)];
