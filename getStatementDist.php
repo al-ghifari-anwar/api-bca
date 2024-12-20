@@ -140,7 +140,9 @@ foreach ($detailData as $detailData) {
 
                             curl_close($curl);
 
-                            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
+                            $resTf = json_decode($response, true);
+
+                            $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!", "detail" => json_encode($resTf)];
                             echo json_encode($return);
                         } else {
                             $return = ["response" => 200, "status" => "failed", "message" => "Status set but payment is not saved yet", "detail" => mysqli_error($conn)];
@@ -182,7 +184,7 @@ foreach ($detailData as $detailData) {
                     $curl = curl_init();
 
                     curl_setopt_array($curl, array(
-                        CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name,
+                        CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
                         CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_ENCODING => '',
                         CURLOPT_MAXREDIRS => 10,
@@ -196,7 +198,9 @@ foreach ($detailData as $detailData) {
 
                     curl_close($curl);
 
-                    $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
+                    $resTf = json_decode($response, true);
+
+                    $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
                     echo json_encode($return);
                 } else {
                     $return = ["response" => 200, "status" => "failed", "message" => "Failed to save payment", "detail" => mysqli_error($conn)];
