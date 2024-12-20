@@ -91,7 +91,7 @@ $res = json_decode($response, true);
 // echo $response;
 
 if ($res['responseMessage'] == "Successful") {
-    $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!"];
+    $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!", "detail" => $res];
     echo json_encode($return);
 } else {
     $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
