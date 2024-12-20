@@ -18,7 +18,7 @@ $oauth_token = $rowToken['bca_token'];
 // GET Value
 $to_account = $_GET['to'];
 $amount = number_format(10000, 2, '.', '');
-$from_account = "888105136";
+$from_account = "8880964519";
 $remark = "Auto Trf Vc - " . str_replace("%20", " ", substr($_GET['to_name'], 0, 6));
 // For Body
 $partnerReferenceNo = date("YmdHis") . rand(10000000, 99999999);
