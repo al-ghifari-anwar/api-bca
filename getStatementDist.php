@@ -120,33 +120,36 @@ foreach ($detailData as $detailData) {
                             $statusAutoTf = $rowStatusAutoTf['status_switch_tf'];
 
                             if ($statusAutoTf == 1) {
-                                $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
-                                $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
+                                if ($amount != 30000) {
 
-                                $to_name = $rowCompany['name_company'];
-                                $to_account = $rowCompany['norek_company'];
+                                    $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
+                                    $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
 
-                                // Send Money
-                                $to_name = str_replace(" ", "%20", $to_name);
-                                // TF intrabank
-                                $curl = curl_init();
+                                    $to_name = $rowCompany['name_company'];
+                                    $to_account = $rowCompany['norek_company'];
 
-                                curl_setopt_array($curl, array(
-                                    CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
-                                    CURLOPT_RETURNTRANSFER => true,
-                                    CURLOPT_ENCODING => '',
-                                    CURLOPT_MAXREDIRS => 10,
-                                    CURLOPT_TIMEOUT => 0,
-                                    CURLOPT_FOLLOWLOCATION => true,
-                                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                    CURLOPT_CUSTOMREQUEST => 'GET',
-                                ));
+                                    // Send Money
+                                    $to_name = str_replace(" ", "%20", $to_name);
+                                    // TF intrabank
+                                    $curl = curl_init();
 
-                                $response = curl_exec($curl);
+                                    curl_setopt_array($curl, array(
+                                        CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
+                                        CURLOPT_RETURNTRANSFER => true,
+                                        CURLOPT_ENCODING => '',
+                                        CURLOPT_MAXREDIRS => 10,
+                                        CURLOPT_TIMEOUT => 0,
+                                        CURLOPT_FOLLOWLOCATION => true,
+                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                        CURLOPT_CUSTOMREQUEST => 'GET',
+                                    ));
 
-                                curl_close($curl);
+                                    $response = curl_exec($curl);
 
-                                $resTf = json_decode($response, true);
+                                    curl_close($curl);
+
+                                    $resTf = json_decode($response, true);
+                                }
                             }
 
                             $return = ["response" => 200, "status" => "ok", "message" => "Invoice paid!"];
@@ -185,34 +188,36 @@ foreach ($detailData as $detailData) {
                     $statusAutoTf = $rowStatusAutoTf['status_switch_tf'];
 
                     if ($statusAutoTf == 1) {
+                        if ($amount != 30000) {
 
-                        $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
-                        $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
+                            $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
+                            $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
 
-                        $to_name = $rowCompany['name_company'];
-                        $to_account = $rowCompany['norek_company'];
+                            $to_name = $rowCompany['name_company'];
+                            $to_account = $rowCompany['norek_company'];
 
-                        // Send Money
-                        $to_name = str_replace(" ", "%20", $to_name);
-                        // TF intrabank
-                        $curl = curl_init();
+                            // Send Money
+                            $to_name = str_replace(" ", "%20", $to_name);
+                            // TF intrabank
+                            $curl = curl_init();
 
-                        curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_ENCODING => '',
-                            CURLOPT_MAXREDIRS => 10,
-                            CURLOPT_TIMEOUT => 0,
-                            CURLOPT_FOLLOWLOCATION => true,
-                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                            CURLOPT_CUSTOMREQUEST => 'GET',
-                        ));
+                            curl_setopt_array($curl, array(
+                                CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
+                                CURLOPT_RETURNTRANSFER => true,
+                                CURLOPT_ENCODING => '',
+                                CURLOPT_MAXREDIRS => 10,
+                                CURLOPT_TIMEOUT => 0,
+                                CURLOPT_FOLLOWLOCATION => true,
+                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                CURLOPT_CUSTOMREQUEST => 'GET',
+                            ));
 
-                        $response = curl_exec($curl);
+                            $response = curl_exec($curl);
 
-                        curl_close($curl);
+                            curl_close($curl);
 
-                        $resTf = json_decode($response, true);
+                            $resTf = json_decode($response, true);
+                        }
                     }
 
                     $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
