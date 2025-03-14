@@ -218,11 +218,13 @@ foreach ($detailData as $detailData) {
 
                             $resTf = json_decode($response, true);
 
+                            echo $response;
+
                             if ($resTf['status'] == 'ok') {
                                 $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
                                 echo json_encode($return);
                             } else {
-                                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but amount not transferred", "detail" => $response];
+                                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but amount not transferred", "detail" => $resTf];
                                 echo json_encode($return);
                             }
                         } else {
