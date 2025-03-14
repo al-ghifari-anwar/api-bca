@@ -222,7 +222,7 @@ foreach ($detailData as $detailData) {
                                 $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
                                 echo json_encode($return);
                             } else {
-                                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but amount not transferred", "detail" => $resTf];
+                                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but amount not transferred", "detail" => $response];
                                 echo json_encode($return);
                             }
                         } else {
