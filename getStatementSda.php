@@ -220,7 +220,7 @@ foreach ($detailData as $detailData) {
                         }
                     }
 
-                    $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!"];
+                    $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
                     echo json_encode($return);
                 } else {
                     $return = ["response" => 200, "status" => "failed", "message" => "Failed to save payment", "detail" => mysqli_error($conn)];
