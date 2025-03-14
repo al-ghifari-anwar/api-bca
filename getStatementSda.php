@@ -217,11 +217,22 @@ foreach ($detailData as $detailData) {
                             curl_close($curl);
 
                             $resTf = json_decode($response, true);
-                        }
-                    }
 
-                    $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
-                    echo json_encode($return);
+                            if ($resTf['status'] == 'ok') {
+                                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
+                                echo json_encode($return);
+                            } else {
+                                $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but amount not transferred", "detail" => $resTf];
+                                echo json_encode($return);
+                            }
+                        } else {
+                            $return = ["response" => 200, "status" => "ok", "message" => "Biaya admin!"];
+                            echo json_encode($return);
+                        }
+                    } else {
+                        $return = ["response" => 200, "status" => "ok", "message" => "Switch off"];
+                        echo json_encode($return);
+                    }
                 } else {
                     $return = ["response" => 200, "status" => "failed", "message" => "Failed to save payment", "detail" => mysqli_error($conn)];
                     echo json_encode($return);
