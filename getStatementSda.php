@@ -197,7 +197,7 @@ foreach ($detailData as $detailData) {
                             $to_account = $rowCompany['norek_company'];
 
                             // Send Money
-                            $to_name = str_replace(" ", "%20", $to_name);
+                            $to_name = "Sidoarjo3";
                             // TF intrabank
                             $curl = curl_init();
 
@@ -218,7 +218,7 @@ foreach ($detailData as $detailData) {
 
                             $resTf = json_decode($response, true);
 
-                            echo $response;
+                            // echo $response;
 
                             if ($resTf['status'] == 'ok') {
                                 $return = ["response" => 200, "status" => "ok", "message" => "Payment saved but don't have an invoice data!", "detail" => $resTf];
