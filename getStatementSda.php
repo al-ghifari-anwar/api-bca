@@ -134,7 +134,7 @@ foreach ($detailData as $detailData) {
                                     $curl = curl_init();
 
                                     curl_setopt_array($curl, array(
-                                        CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankDist.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
+                                        CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntrabankSda.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
                                         CURLOPT_RETURNTRANSFER => true,
                                         CURLOPT_ENCODING => '',
                                         CURLOPT_MAXREDIRS => 10,
