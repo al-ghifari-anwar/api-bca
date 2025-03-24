@@ -46,15 +46,15 @@ $signatureApi = $signatureUtil->generateServiceSignature($client_secret, $method
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://api.klikbca.com/openapi/v1.0/transfer-intrabank',
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => '{
+  CURLOPT_URL => 'https://api.klikbca.com/openapi/v1.0/transfer-intrabank',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => '{
   "partnerReferenceNo": "' . $partnerReferenceNo . '",
   "amount": {
     "value": "' . $amount . '",
@@ -69,17 +69,17 @@ curl_setopt_array($curl, array(
     "transactionPurpose": "01"
   }
 }',
-    CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer ' . $oauth_token,
-        'Content-Type: application/json',
-        'CHANNEL-ID: 95051',
-        'X-TIMESTAMP: ' . $time_stamp,
-        'X-SIGNATURE: ' . $signatureApi,
-        'ORIGIN: ' . 'topmortarindonesia.com',
-        'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
-        'X-PARTNER-ID: KBBTOPMORT',
-        'X-CLIENT-KEY: ' . $client_id
-    ),
+  CURLOPT_HTTPHEADER => array(
+    'Authorization: Bearer ' . $oauth_token,
+    'Content-Type: application/json',
+    'CHANNEL-ID: 95051',
+    'X-TIMESTAMP: ' . $time_stamp,
+    'X-SIGNATURE: ' . $signatureApi,
+    'ORIGIN: ' . 'topmortarindonesia.com',
+    'X-EXTERNAL-ID: ' . rand(10000000, 99999999),
+    'X-PARTNER-ID: KBBTOPMORT',
+    'X-CLIENT-KEY: ' . $client_id
+  ),
 ));
 
 $response = curl_exec($curl);
@@ -91,9 +91,11 @@ $res = json_decode($response, true);
 // echo $response;
 
 if ($res['responseMessage'] == "Successful") {
-    $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!", "detail" => $res];
-    echo json_encode($return);
+  $insert = mysqli_query($conn, "INSERT INTO tb_log_bca(source_account,to_account,amount_log_bca,status_log_bca,ref_log_bca) VALUES('$from_account', '$to_account', '$amount', 'success','$partnerReferenceNo')");
+  $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!", "detail" => $res];
+  echo json_encode($return);
 } else {
-    $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
-    echo json_encode($return);
+  $insert = mysqli_query($conn, "INSERT INTO tb_log_bca(source_account,to_account,amount_log_bca,status_log_bca,ref_log_bca) VALUES('$from_account', '$to_account', '$amount', 'failed','$partnerReferenceNo')");
+  $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
+  echo json_encode($return);
 }

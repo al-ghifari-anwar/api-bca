@@ -91,9 +91,11 @@ $res = json_decode($response, true);
 // echo $response;
 
 if ($res['responseMessage'] == "Successful") {
+  $insert = mysqli_query($conn, "INSERT INTO tb_log_bca(source_account,to_account,amount_log_bca,status_log_bca,ref_log_bca) VALUES('$from_account', '$to_account', '$amount', 'success','$partnerReferenceNo')");
   $return = ["response" => 200, "status" => "ok", "message" => "Success transfered, log saved!"];
   echo json_encode($return);
 } else {
+  $insert = mysqli_query($conn, "INSERT INTO tb_log_bca(source_account,to_account,amount_log_bca,status_log_bca,ref_log_bca) VALUES('$from_account', '$to_account', '$amount', 'failed','$partnerReferenceNo')");
   $return = ["response" => 200, "status" => "failed", "message" => "Transfer failed", "detail" => $res];
   echo json_encode($return);
 }
