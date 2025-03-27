@@ -120,34 +120,35 @@ foreach ($detailData as $detailData) {
 
                             if ($statusAutoTf == 1) {
                                 if ($amount != 30000) {
+                                    if ($amount != 1050000) {
+                                        // $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
+                                        // $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
 
-                                    // $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
-                                    // $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
+                                        $to_name = 'Jessy';
+                                        $to_account = '3160258313';
 
-                                    $to_name = 'Jessy';
-                                    $to_account = '3160258313';
+                                        // Send Money
+                                        $to_name = str_replace(" ", "%20", $to_name);
+                                        // TF intrabank
+                                        $curl = curl_init();
 
-                                    // Send Money
-                                    $to_name = str_replace(" ", "%20", $to_name);
-                                    // TF intrabank
-                                    $curl = curl_init();
+                                        curl_setopt_array($curl, array(
+                                            CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntraTop.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
+                                            CURLOPT_RETURNTRANSFER => true,
+                                            CURLOPT_ENCODING => '',
+                                            CURLOPT_MAXREDIRS => 10,
+                                            CURLOPT_TIMEOUT => 0,
+                                            CURLOPT_FOLLOWLOCATION => true,
+                                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                            CURLOPT_CUSTOMREQUEST => 'GET',
+                                        ));
 
-                                    curl_setopt_array($curl, array(
-                                        CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntraTop.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
-                                        CURLOPT_RETURNTRANSFER => true,
-                                        CURLOPT_ENCODING => '',
-                                        CURLOPT_MAXREDIRS => 10,
-                                        CURLOPT_TIMEOUT => 0,
-                                        CURLOPT_FOLLOWLOCATION => true,
-                                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                        CURLOPT_CUSTOMREQUEST => 'GET',
-                                    ));
+                                        $response = curl_exec($curl);
 
-                                    $response = curl_exec($curl);
+                                        curl_close($curl);
 
-                                    curl_close($curl);
-
-                                    $resTf = json_decode($response, true);
+                                        $resTf = json_decode($response, true);
+                                    }
                                 }
                             }
 
@@ -185,34 +186,37 @@ foreach ($detailData as $detailData) {
 
                     if ($statusAutoTf == 1) {
                         if ($amount != 30000) {
+                            if ($amount != 1050000) {
 
-                            // $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
-                            // $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
 
-                            $to_name = 'Jessy';
-                            $to_account = '3160258313';
+                                // $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
+                                // $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
 
-                            // Send Money
-                            $to_name = str_replace(" ", "%20", $to_name);
-                            // TF intrabank
-                            $curl = curl_init();
+                                $to_name = 'Jessy';
+                                $to_account = '3160258313';
 
-                            curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntraTop.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_ENCODING => '',
-                                CURLOPT_MAXREDIRS => 10,
-                                CURLOPT_TIMEOUT => 0,
-                                CURLOPT_FOLLOWLOCATION => true,
-                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                                CURLOPT_CUSTOMREQUEST => 'GET',
-                            ));
+                                // Send Money
+                                $to_name = str_replace(" ", "%20", $to_name);
+                                // TF intrabank
+                                $curl = curl_init();
 
-                            $response = curl_exec($curl);
+                                curl_setopt_array($curl, array(
+                                    CURLOPT_URL => 'https://apibca.topmortarindonesia.com/snapIntraTop.php?to=' . $to_account . '&to_name=' . $to_name . '&amount=' . $amount,
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_ENCODING => '',
+                                    CURLOPT_MAXREDIRS => 10,
+                                    CURLOPT_TIMEOUT => 0,
+                                    CURLOPT_FOLLOWLOCATION => true,
+                                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                    CURLOPT_CUSTOMREQUEST => 'GET',
+                                ));
 
-                            curl_close($curl);
+                                $response = curl_exec($curl);
 
-                            $resTf = json_decode($response, true);
+                                curl_close($curl);
+
+                                $resTf = json_decode($response, true);
+                            }
                         }
                     }
 
