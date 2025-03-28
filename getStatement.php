@@ -120,7 +120,7 @@ foreach ($detailData as $detailData) {
 
                             if ($statusAutoTf == 1) {
                                 if ($amount != 30000) {
-                                    if ($amount != 1050000) {
+                                    if ($amount != 722480) {
                                         // $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
                                         // $rowCompany = $getCompany->fetch_array(MYSQLI_ASSOC);
 
@@ -186,7 +186,7 @@ foreach ($detailData as $detailData) {
 
                     if ($statusAutoTf == 1) {
                         if ($amount != 30000) {
-                            if ($amount != 1050000) {
+                            if ($amount != 722480) {
 
 
                                 // $getCompany = mysqli_query($conn, "SELECT * FROM tb_company WHERE id_distributor = '$id_distributor'");
